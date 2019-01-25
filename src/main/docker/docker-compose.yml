@@ -1,0 +1,28 @@
+version: '3'
+services:
+  payara-simplers:
+    build:
+      context: ../../..
+      dockerfile: $PWD/src/main/docker/payara-simplers/Dockerfile
+    image: brunoe/simplers-server
+    environment:
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+      - "4848:4848"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_PASSWORD: glassfishdbpassword
+      POSTGRES_USER: glassfish
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/pgdata
+
+volumes:
+  pgdata:
