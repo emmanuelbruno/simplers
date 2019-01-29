@@ -1,5 +1,5 @@
 # First Build and RUN
-docker compose up --build
+docker-compose up --build
 
 # Build and update app
 mvn clean package && \
